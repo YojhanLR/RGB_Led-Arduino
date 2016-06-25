@@ -67,8 +67,9 @@ void loop() {
   /*Revisa si ya ha pasado el tiempo estimado*/
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
-    for(int i=0; i<5; i++){
-      cambioHora();}
+    for (int i = 0; i < 3; i++) {
+      cambioHora();
+    }
 
     previousMillis =  millis();
     analogWrite(redPin, lastColor[0]);
@@ -91,20 +92,12 @@ void inicio() {
 }
 
 void movimiento() {
-  analogWrite(redPin, 255);
-  analogWrite(greenPin, 0);
-  analogWrite(bluePin, 0);
+  rojo();
   delay(50);
   digitalWrite(redPin, LOW);
   digitalWrite(greenPin, LOW);
   digitalWrite(bluePin, LOW);
   delay(50);
-}
-
-void amarillo() {
-  analogWrite(redPin, 246);
-  analogWrite(greenPin, 112);
-  analogWrite(bluePin, 0);
 }
 
 void cambioHora() {
@@ -140,4 +133,50 @@ void cambioHora() {
     analogWrite(greenPin, green);
     delay(FADESPEED);
   }
+
+  for (int i = 0; i < 50; i++) {
+    amarillo();
+    delay(50);
+    digitalWrite(redPin, LOW);
+    digitalWrite(greenPin, LOW);
+    digitalWrite(bluePin, LOW);
+    delay(50);
+  }
+  for (int i = 0; i < 50; i++) {
+    azul();
+    delay(50);
+    digitalWrite(redPin, LOW);
+    digitalWrite(greenPin, LOW);
+    digitalWrite(bluePin, LOW);
+    delay(50);
+  }
+  for (int i = 0; i < 50; i++) {
+    rojo();
+    delay(50);
+    digitalWrite(redPin, LOW);
+    digitalWrite(greenPin, LOW);
+    digitalWrite(bluePin, LOW);
+    delay(50);
+  }
+
+}
+
+
+void amarillo() {
+  analogWrite(redPin, 246);
+  analogWrite(greenPin, 112);
+  analogWrite(bluePin, 0);
+}
+
+void azul() {
+  analogWrite(redPin, 0);
+  analogWrite(greenPin, 0);
+  analogWrite(bluePin, 255);
+}
+
+
+void rojo() {
+  analogWrite(redPin, 255);
+  analogWrite(greenPin, 0);
+  analogWrite(bluePin, 0);
 }
