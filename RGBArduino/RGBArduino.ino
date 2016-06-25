@@ -1,8 +1,148 @@
+/*
+  Super Mario Brothers Overworld Melody
+
+  Note Durations:
+    1 = whole note, 2 = half note,
+    4 = quarter note, 8 = eighth note,
+    and so on.
+
+*/
+#include "pitches.h"
+
+
+int arrayLength;
+
+// intro notes and durations
+int smbIntroNotes[] = {
+  NOTE_E4, NOTE_E4, 0, NOTE_E4, 0, NOTE_C4, NOTE_E4, 0,
+  NOTE_G4, 0, 0, NOTE_G3, 0, 0
+};
+int smbIntroDurations[] = {
+  8 , 8, 8, 8, 8, 8, 8, 8,
+  8, 8, 4, 8, 8, 4
+};
+
+// part A notes and durations
+int smbANotes[] = {
+  NOTE_C4, 0, 0, NOTE_G3, 0, NOTE_E3, 0,
+  0, NOTE_A3, 0, NOTE_B3, 0, NOTE_AS3, NOTE_A3, 0,
+  NOTE_G3, NOTE_E4, NOTE_G4, NOTE_A4, 0, NOTE_F4, NOTE_G4,
+  0, NOTE_E4, 0, NOTE_C4, NOTE_D4, NOTE_B3, 0,
+  NOTE_C4, 0, 0, NOTE_G3, 0, NOTE_E3, 0,
+  0, NOTE_A3, 0, NOTE_B3, 0, NOTE_AS3, NOTE_A3, 0,
+  NOTE_G3, NOTE_E4, NOTE_G4, NOTE_A4, 0, NOTE_F4, NOTE_G4,
+  0, NOTE_E4, 0, NOTE_C4, NOTE_D4, NOTE_B3, 0
+};
+int smbADurations[] = {
+  8, 8, 8, 8, 4, 8, 8,
+  8, 8, 8, 8, 8, 8, 8, 8,
+  6, 6, 6, 8, 8, 8, 8,
+  8, 8, 8, 8, 8, 8, 4,
+  8, 8, 8, 8, 4, 8, 8,
+  8, 8, 8, 8, 8, 8, 8, 8,
+  6, 6, 6, 8, 8, 8, 8,
+  8, 8, 8, 8, 8, 8, 4
+};
+
+// part B notes and durations
+int smbBNotes[] = {
+  0, NOTE_G4, NOTE_FS4, NOTE_FF4, NOTE_DS4, 0, NOTE_E4,
+  0, NOTE_GS3, NOTE_A3, NOTE_C4, 0, NOTE_A3, NOTE_C4, NOTE_D4,
+  0, NOTE_G4, NOTE_FS4, NOTE_FF4, NOTE_DS4, 0, NOTE_E4,
+  0, NOTE_C5, 0, NOTE_C5, NOTE_C5, 0, 0,
+  0, NOTE_G4, NOTE_FS4, NOTE_FF4, NOTE_DS4, 0, NOTE_E4,
+  0, NOTE_GS3, NOTE_A3, NOTE_C4, 0, NOTE_A3, NOTE_C4, NOTE_D4,
+  0, NOTE_DS4, 0, 0, NOTE_D4, 0,
+  NOTE_C4, 0, 0, 0,
+  0, NOTE_G4, NOTE_FS4, NOTE_FF4, NOTE_DS4, 0, NOTE_E4,
+  0, NOTE_GS3, NOTE_A3, NOTE_C4, 0, NOTE_A3, NOTE_C4, NOTE_D4,
+  0, NOTE_G4, NOTE_FS4, NOTE_FF4, NOTE_DS4, 0, NOTE_E4,
+  0, NOTE_C5, 0, NOTE_C5, NOTE_C5, 0, 0,
+  0, NOTE_G4, NOTE_FS4, NOTE_FF4, NOTE_DS4, 0, NOTE_E4,
+  0, NOTE_GS3, NOTE_A3, NOTE_C4, 0, NOTE_A3, NOTE_C4, NOTE_D4,
+  0, NOTE_DS4, 0, 0, NOTE_D4, 0,
+  NOTE_C4, 0, 0, 0
+};
+int smbBDurations[] = {
+  4, 8, 8, 8, 8, 8, 8,
+  8, 8, 8, 8, 8, 8, 8, 8,
+  4, 8, 8, 8, 8, 8, 8,
+  8, 8, 8, 8, 8, 8, 4,
+  4, 8, 8, 8, 8, 8, 8,
+  8, 8, 8, 8, 8, 8, 8, 8,
+  4, 8, 8, 8, 8, 4,
+  8, 8, 4, 2,
+  4, 8, 8, 8, 8, 8, 8,
+  8, 8, 8, 8, 8, 8, 8, 8,
+  4, 8, 8, 8, 8, 8, 8,
+  8, 8, 8, 8, 8, 8, 4,
+  4, 8, 8, 8, 8, 8, 8,
+  8, 8, 8, 8, 8, 8, 8, 8,
+  4, 8, 8, 8, 8, 4,
+  8, 8, 4, 2
+};
+
+// part C notes and durations
+int smbCNotes[] = {
+  NOTE_C4, NOTE_C4, 0, NOTE_C4, 0, NOTE_C4, NOTE_D4, 0,
+  NOTE_E4, NOTE_C4, 0, NOTE_A3, NOTE_G3, 0, 0,
+  NOTE_C4, NOTE_C4, 0, NOTE_C4, 0, NOTE_C4, NOTE_D4, NOTE_E4,
+  0,
+  NOTE_C4, NOTE_C4, 0, NOTE_C4, 0, NOTE_C4, NOTE_D4, 0,
+  NOTE_E4, NOTE_C4, 0, NOTE_A3, NOTE_G3, 0, 0,
+  NOTE_E4, NOTE_E4, 0, NOTE_E4, 0, NOTE_C4, NOTE_E4, 0,
+  NOTE_G4, 0, 0, NOTE_G3, 0, 0
+};
+int smbCDurations[] = {
+  8, 8, 8, 8, 8, 8, 8, 8,
+  8, 8, 8, 8, 8, 8, 4,
+  8, 8, 8, 8, 8, 8, 8, 8,
+  1,
+  8, 8, 8, 8, 8, 8, 8, 8,
+  8, 8, 8, 8, 8, 8, 4,
+  8, 8, 8, 8, 8, 8, 8, 8,
+  8, 8, 4, 8, 8, 4
+};
+
+// part D notes and durations
+int smbDNotes[] = {
+  NOTE_E4, NOTE_C4, 0, NOTE_G3, 0, NOTE_GS3, 0,
+  NOTE_A3, NOTE_F4, 0, NOTE_F4, NOTE_A3, 0, 0,
+  NOTE_B3, NOTE_A4, NOTE_A4, NOTE_A4, NOTE_G4, NOTE_F4,
+  NOTE_E4, NOTE_C4, 0, NOTE_A3, NOTE_G3, 0, 0,
+  NOTE_E4, NOTE_C4, 0, NOTE_G3, 0, NOTE_GS3, 0,
+  NOTE_A3, NOTE_F4, 0, NOTE_F4, NOTE_A3, 0, 0,
+  NOTE_B3, NOTE_F4, 0, NOTE_F4, NOTE_F4, NOTE_E4, NOTE_D4,
+  NOTE_C4, NOTE_E3, 0, NOTE_E3, NOTE_C2, 0, 0
+};
+int smbDDurations[] = {
+  8, 8, 8, 8, 4, 8, 8,
+  8, 8, 8, 8, 8, 8, 4,
+  6, 6, 6, 6, 6, 6,
+  8, 8, 8, 8, 8, 8, 4,
+  8, 8, 8, 8, 4, 8, 8,
+  8, 8, 8, 8, 8, 8, 4,
+  8, 8, 8, 8, 6, 6, 6,
+  8, 8, 8, 8, 8, 8, 4
+};
+
+
+int tempo = 1000;
+
+
+/*-------------------------------------------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------------------------------------------
+  -------------------------------------C O D I G O --- A R D U I N O----------------------------------------------------
+  --------------------------------------------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------------------------------------------*/
+
+
 //Definiciones de pines.  Deben ser pines PWM en el Arduino para el RGB Led!
 const int bluePin = 9;
 const int redPin = 10;
 const int greenPin = 11;
 const int pirPin = 2;
+const int pinBuzzer = 6;
 
 int u, d, c, p; //Recibe las unidades, decenas y centenas y el resultado p
 int input; //Donde se cambiara el color
@@ -57,6 +197,7 @@ void loop() {
   if (value == HIGH)
   {
     movimiento();
+    
   }
   else {
     analogWrite(redPin, lastColor[0]);
@@ -67,10 +208,9 @@ void loop() {
   /*Revisa si ya ha pasado el tiempo estimado*/
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
-    for (int i = 0; i < 3; i++) {
-      cambioHora();
-    }
-
+    
+    cambioHora();
+    
     previousMillis =  millis();
     analogWrite(redPin, lastColor[0]);
     analogWrite(greenPin, lastColor[1]);
@@ -92,7 +232,7 @@ void inicio() {
 }
 
 void movimiento() {
-  rojo();
+  verde();
   delay(50);
   digitalWrite(redPin, LOW);
   digitalWrite(greenPin, LOW);
@@ -101,7 +241,7 @@ void movimiento() {
 }
 
 void cambioHora() {
-  int FADESPEED = 5;
+  int FADESPEED = 1;
 
   // fade from blue to violet
   for (int red = 0; red < 256; red++) {
@@ -134,30 +274,87 @@ void cambioHora() {
     delay(FADESPEED);
   }
 
-  for (int i = 0; i < 50; i++) {
+  digitalWrite(redPin, LOW);
+  digitalWrite(greenPin, LOW);
+  digitalWrite(bluePin, LOW);
+  
+  comenzarCancion();
+
+  for (int i = 0; i < 30; i++) {
     amarillo();
-    delay(50);
+    delay(20);
     digitalWrite(redPin, LOW);
     digitalWrite(greenPin, LOW);
     digitalWrite(bluePin, LOW);
-    delay(50);
+    delay(20);
   }
-  for (int i = 0; i < 50; i++) {
+  for (int i = 0; i < 30; i++) {
     azul();
-    delay(50);
+    delay(20);
     digitalWrite(redPin, LOW);
     digitalWrite(greenPin, LOW);
     digitalWrite(bluePin, LOW);
-    delay(50);
+    delay(20);
   }
-  for (int i = 0; i < 50; i++) {
+  for (int i = 0; i < 30; i++) {
     rojo();
-    delay(50);
+    delay(20);
     digitalWrite(redPin, LOW);
     digitalWrite(greenPin, LOW);
     digitalWrite(bluePin, LOW);
-    delay(50);
+    delay(20);
   }
+  for (int i = 0; i < 30; i++) {
+    verde();
+    delay(20);
+    digitalWrite(redPin, LOW);
+    digitalWrite(greenPin, LOW);
+    digitalWrite(bluePin, LOW);
+    delay(20);
+  }
+
+}
+
+void playNotes(int myNotes[], int myDurations[], int myLength) {
+
+  Serial.println(arrayLength);
+  for (int thisNote = 0; thisNote < arrayLength; thisNote++) {
+    // to calculate the note duration, take one second
+    // divided by the note type.
+    int noteDuration = tempo / myDurations[thisNote];
+    analogWrite(redPin, myNotes[thisNote]);
+    tone(pinBuzzer, myNotes[thisNote], noteDuration);
+
+
+    // to distinguish the notes, set a minimum time between them.
+    // the note's duration + 30% seems to work well:
+    int pauseBetweenNotes = noteDuration * 1.30;
+    delay(pauseBetweenNotes);
+    // stop the tone playing:
+    noTone(pinBuzzer);
+
+
+  }
+}
+
+void comenzarCancion() {
+  arrayLength = sizeof(smbIntroDurations) / sizeof(int);
+  playNotes(smbIntroNotes, smbIntroDurations, arrayLength);
+
+  arrayLength = sizeof(smbADurations) / sizeof(int);
+  playNotes(smbANotes, smbADurations, arrayLength);
+
+  arrayLength = sizeof(smbBDurations) / sizeof(int);
+  playNotes(smbBNotes, smbBDurations, arrayLength);
+
+  arrayLength = sizeof(smbCDurations) / sizeof(int);
+  playNotes(smbCNotes, smbCDurations, arrayLength);
+
+  arrayLength = sizeof(smbADurations) / sizeof(int);
+  playNotes(smbANotes, smbADurations, arrayLength);
+
+  arrayLength = sizeof(smbDDurations) / sizeof(int);
+  playNotes(smbDNotes, smbDDurations, arrayLength);
 
 }
 
@@ -178,5 +375,11 @@ void azul() {
 void rojo() {
   analogWrite(redPin, 255);
   analogWrite(greenPin, 0);
+  analogWrite(bluePin, 0);
+}
+
+void verde() {
+  analogWrite(redPin, 0);
+  analogWrite(greenPin, 255);
   analogWrite(bluePin, 0);
 }

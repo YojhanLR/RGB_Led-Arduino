@@ -44,6 +44,7 @@
 #define NOTE_D4  294
 #define NOTE_DS4 311
 #define NOTE_E4  330
+#define NOTE_FF4 340 // F flat needed for SMB Overworld Song
 #define NOTE_F4  349
 #define NOTE_FS4 370
 #define NOTE_G4  392
