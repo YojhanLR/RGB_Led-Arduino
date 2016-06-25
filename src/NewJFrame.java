@@ -1,5 +1,7 @@
 
 import com.panamahitek.PanamaHitek_Arduino;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -36,10 +38,23 @@ public class NewJFrame extends javax.swing.JFrame {
             
             @Override
             public void stateChanged(ChangeEvent e) {
-                System.out.println("Cambio de color: "+jColorChooser1.getColor());
-                R = jColorChooser1.getColor().getRed();
-                G = jColorChooser1.getColor().getGreen();
-                B = jColorChooser1.getColor().getBlue();
+                try {
+                    System.out.println("Cambio de color: "+jColorChooser1.getColor());
+                    R = jColorChooser1.getColor().getRed();
+                    G = jColorChooser1.getColor().getGreen();
+                    B = jColorChooser1.getColor().getBlue();
+                    Thread.sleep(100);
+                    SetData();
+                    try {
+                        Arduino.sendData(OutputR);
+                        Arduino.sendData(OutputG);
+                        Arduino.sendData(OutputB);
+                    } catch (Exception ex) {
+                        System.out.println("Error enviando datos: "+ex);
+                    }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
          model.addChangeListener(changeListener);
