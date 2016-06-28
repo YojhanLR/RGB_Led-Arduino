@@ -1,3 +1,4 @@
+
 /*
   Super Mario Brothers Overworld Melody
 
@@ -142,14 +143,17 @@ const int bluePin = 9;
 const int redPin = 10;
 const int greenPin = 11;
 const int pirPin = 2;
-const int pinBuzzer = 6;
+const int pinBuzzer = 12;
 
-int u, d, c, p; //Recibe las unidades, decenas y centenas y el resultado p
-int input; //Donde se cambiara el color
-int lastColor[3] = {246, 112, 0}; //Amarillo por defecto
+//Recibe las unidades, decenas y centenas y el resultado p
+int u, d, c, p; 
+//Donde se cambiara el color
+int input; 
+//Amarillo por defecto
+int lastColor[3] = {246, 112, 0};
 
 unsigned long previousMillis = 0;        // will store last time LED was updated
-const long interval = 60000;           // interval at which to blink (milliseconds)
+const long interval = 90000;           // interval at which to blink (milliseconds)
 
 void setup() {
   //Se asignan los pines a usar
@@ -232,12 +236,15 @@ void inicio() {
 }
 
 void movimiento() {
-  verde();
-  delay(50);
-  digitalWrite(redPin, LOW);
-  digitalWrite(greenPin, LOW);
-  digitalWrite(bluePin, LOW);
-  delay(50);
+  azul();
+  for(int i=255; i>1; i--){
+    analogWrite(greenPin,i);
+    delay(7);
+    }
+  for(int i=0; i<255; i++){
+    analogWrite(greenPin,i);
+    delay(7);
+    }
 }
 
 void cambioHora() {
