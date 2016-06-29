@@ -2,6 +2,7 @@
 import com.panamahitek.PanamaHitek_Arduino;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -80,16 +81,16 @@ public class NewJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jColorChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(10, 10, 10)
+                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jColorChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -97,6 +98,17 @@ public class NewJFrame extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
+     * try{
+        short x = (short) Integer.parseInt(jTextField1.getText());
+            System.out.println(x);
+            byte upper = (byte) (x >> 8); //Get the upper 8 bits
+            byte lower = (byte) (x & 0xFF); //Get the lower 8bits
+            Arduino.sendData(upper);
+            Arduino.sendData(lower);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Error: "+e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

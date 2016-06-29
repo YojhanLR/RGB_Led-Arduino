@@ -175,6 +175,10 @@ void loop() {
   /*Revisa si se estan enviando datos desde la App*/
   if (Serial.available()) {
     input = Serial.read() - 48;
+    if(input == 4){
+      int numero = Serial.read();
+      interval = toLong(numero);
+      }
     delay(10);
     c = Serial.read() - 48;
     delay(10);
